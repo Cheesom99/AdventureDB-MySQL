@@ -32,7 +32,6 @@ I used 7 tables which are
 - **dbo.DimProductSubCategory**: Product subcategory key and names in different languages
 - **dbo.FactInternetSales**: Data like date sold, unit price, customer key, etc.
 
-
 ## Business Questions
 
 All these questions are for the years 2018 - 2021 <br>
