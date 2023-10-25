@@ -21,8 +21,8 @@ You need to setup Microsoft SQL Server. [Use these instructions](https://learn.m
 ## The Database Schema
 
 There are 30 tables in this database and they can be divided into these groups:
-- Dimension Table
-- Fact Table <br>
+- Dimension Tables
+- Fact Tables <br>
 <br>
 I used 7 tables which are
 - **dbo.DimCustomer**: Stores customer data
