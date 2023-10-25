@@ -25,12 +25,15 @@ There are 30 tables in this database and they can be divided into these groups:
 - Fact Tables <br>
 <br>
 I used 7 tables which are
-- **dbo.DimCustomer**: Stores customer data
-- **dbo.DimDate**: Stores data concerning dates
-- **dbo.DimProduct**: Data on the product like Name, Stock level, Colour, Days to manufacture.
-- **dbo.DimProductCategory**: Product category key and names in different languages
-- **dbo.DimProductSubCategory**: Product subcategory key and names in different languages
-- **dbo.FactInternetSales**: Data like date sold, unit price, customer key, etc.
+<ul>
+  <li><strong>dbo.DimCustomer</strong>: Stores customer data</li>
+  <li><strong>dbo.DimDate</strong>: Stores data concerning dates</li>
+  <li><strong>dbo.DimProduct</strong>: Data on the product like Name, Stock level, Colour, Days to manufacture.</li>
+  <li><strong>dbo.DimProductCategory</strong>: Product category key and names in different languages</li>
+  <li><strong>dbo.DimProductSubCategory</strong>: Product subcategory key and names in different languages</li>
+  <li><strong>dbo.FactInternetSales</strong>: Data like date sold, unit price, customer key, etc.</li>
+</ul>
+
 
 ## Business Questions
 
