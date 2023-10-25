@@ -30,7 +30,8 @@ I used 7 tables which are
 - **dbo.DimProduct**: Data on the product like Name, Stock level, Colour, Days to manufacture.
 - **dbo.DimProductCategory**: Product category key and names in different languages
 - **dbo.DimProductSubCategory**: Product subcategory key and names in different languages
-- **dbo.FactInternetSales**: Data like date sold, unit price, customer key etc
+- **dbo.FactInternetSales**: Data like date sold, unit price, customer key, etc.
+
 
 ## Business Questions
 
@@ -44,6 +45,7 @@ All these questions are for the years 2018 - 2021 <br>
 - [Data Wrangling](#data-wrangling)
 - [Key Insights](#key-insights)
 - [Recommendations](#recommendations)
+
 
 ## The Dashboard
 
