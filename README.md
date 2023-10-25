@@ -34,16 +34,16 @@ I used 7 tables which are
 
 ## Business Questions
 
-All these questions are for the years 2018 - 2021
+All these questions are for the years 2018 - 2021 <br>
 - What demographic makes up the bulk of the customers? In age, gender and income.
 - What cities should the business focus on to increase sales?
 - Who are the highest spending customers?
 - Are there trends in the sales overtime?
 
 ## Data Analysis
-[Data Wrangling](#data-wrangling)
-[Key Insights](#key-insights)
-[Recommendations](#recommendations)
+- [Data Wrangling](#data-wrangling)
+- [Key Insights](#key-insights)
+- [Recommendations](#recommendations)
 
 ## The Dashboard
 
