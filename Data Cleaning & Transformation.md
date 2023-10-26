@@ -1,10 +1,10 @@
 <p align="center">
-  <b><span style="font-size: 96px;">Data Cleaning & Transformation</span></b>
+  <b><span># Data Cleaning & Transformation</span></b>
 </p>
 
-## Getting the tables ready for analysis and the dashboard
+### Getting the tables ready for analysis and the dashboard
 
-### 1. DimDate Table
+#### 1. DimDate Table
 
 **Steps Taken:**
 
@@ -39,7 +39,7 @@ CalendarYear >= 2018;
 | 20180105 | 05/01/2018 | Friday    | 1       | January | Jan        | 1        | 1       | 2018 |
 - This is not total output (1461 rows in total)
 
-### 2. DimCustomer Table
+#### 2. DimCustomer Table
 **Steps Taken:**
 
 - Removed irrelevant columns to my analysis.
@@ -79,7 +79,7 @@ FROM
 
 - This is not total output (18,484 rows in total)
 
-### 3. DimProducts Table
+#### 3. DimProducts Table
 **Steps Taken:**
 
 - Removed irrelevant columns to my analysis.
@@ -110,7 +110,7 @@ FROM
 
 - This is not total output (606 rows in total)
 
-### 4. FactInternet Sales Table
+#### 4. FactInternet Sales Table
 **Steps Taken:**
 
 - Removed irrelevant columns to my analysis.
