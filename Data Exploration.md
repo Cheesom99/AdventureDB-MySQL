@@ -73,7 +73,7 @@ ORDER BY LEFT (OrderDateKey, 4)
 - Used CASE statements to categorize the annual incomes
 - Used COUNT to get the number of each occurence
 
-'''sql
+```sql
 SELECT 
   CASE 
     WHEN [YearlyIncome] >= 0 AND [YearlyIncome] <= 25000 THEN '0-25k' 
@@ -81,7 +81,7 @@ SELECT
     WHEN [YearlyIncome] >= 50001 AND [YearlyIncome] <= 75000 THEN '50-75k' 
     WHEN [YearlyIncome] >= 75001 AND [YearlyIncome] <= 100000 THEN '75k-100k' 
     ELSE 'Above 100k' 
-  END AS AmountRange,
+  END AS IncomeCategory,
   COUNT(*) AS No_of_customers
 FROM 
   [AdventureWorksDW2019].[dbo].[DimCustomer] 
@@ -94,10 +94,10 @@ GROUP BY
     ELSE 'Above 100k' 
   END
 ORDER BY No_of_customers DESC;
-'''
+```
 
 **The Output:**
-| AmountRange  | No_of_customers |
+| IncomeCategory  | No_of_customers |
 |-------------|------------|
 | 25k-50k       | 5704       |
 | 50-75k     | 5476       |
@@ -105,15 +105,16 @@ ORDER BY No_of_customers DESC;
 | 75k-100k    | 2755       |
 | Above 100k  | 1627       |
 
-### 5. Customers that earn between 25k to 75k are the most populous, but do they spend the most?
+### 5. What income category spends the most?
 **Steps Taken:**
 
-- Used CASE statements to categorize the annual incomes
-- Used COUNT to get the number of each occurence
+- In the subquery, the total sales amount for each customer key was calculated (added).
+- In the outerquery, I selected the Income Category and added the total sales amount for each, casted it to 2 dp also.
+- Ordered by Highest Sales Category
 
-'''sql
+```sql
 SELECT 
-  AmountRange,
+  IncomeCategory,
   CAST(SUM(TotalSalesAmount) AS DECIMAL(18, 2)) AS Sales
 FROM (
   SELECT 
@@ -123,7 +124,7 @@ FROM (
       WHEN [YearlyIncome] >= 50001 AND [YearlyIncome] <= 75000 THEN '50-75k' 
       WHEN [YearlyIncome] >= 75001 AND [YearlyIncome] <= 100000 THEN '75k-100k' 
       ELSE 'Above 100k' 
-    END AS AmountRange,
+    END AS IncomeCategory,
     SUM(s.SalesAmount) AS TotalSalesAmount
   FROM 
     [AdventureWorksDW2019].[dbo].[DimCustomer] AS c
@@ -131,16 +132,57 @@ FROM (
   ON s.CustomerKey = c.CustomerKey
   GROUP BY [YearlyIncome]
 ) AS Subquery
-GROUP BY AmountRange
+GROUP BY IncomeCategory
 ORDER BY Sales DESC;
-'''
-
+```
 
 **The Output:**
-| AmountRange  | No_of_customers |
+| IncomeCategory  | Sales |
 |-------------|------------|
 | 50-75k       | 8714787.44   |
 | 25k-50k     | 7954391.47   |
 | 75k-100k     | 5531537.77   |
 | Above 100k    | 3750950.96   |
 | 0-25K  | 3407009.58   |
+
+
+### 6. What income category does the most transactions?
+**Steps Taken:**
+
+- Join Customer and Internet Sales Table on Customer key
+- Used CASE statements to get the Income category
+- Count the Product keys for each category by grouping by the categories.
+
+```sql
+SELECT 
+  CASE 
+    WHEN [YearlyIncome] >= 0 AND [YearlyIncome] <= 25000 THEN '0-25k' 
+    WHEN [YearlyIncome] >= 25001 AND [YearlyIncome] <= 50000 THEN '25k-50k' 
+    WHEN [YearlyIncome] >= 50001 AND [YearlyIncome] <= 75000 THEN '50-75k' 
+    WHEN [YearlyIncome] >= 75001 AND [YearlyIncome] <= 100000 THEN '75k-100k' 
+    ELSE 'Above 100k' 
+  END AS IncomeCategory,
+  COUNT(s.ProductKey) AS No_of_transactions
+FROM 
+  [AdventureWorksDW2019].[dbo].[DimCustomer] AS c
+JOIN [dbo].[FactInternetSales] AS s
+ON s.CustomerKey = c.CustomerKey
+GROUP BY 
+  CASE 
+    WHEN [YearlyIncome] >= 0 AND [YearlyIncome] <= 25000 THEN '0-25k' 
+    WHEN [YearlyIncome] >= 25001 AND [YearlyIncome] <= 50000 THEN '25k-50k' 
+    WHEN [YearlyIncome] >= 50001 AND [YearlyIncome] <= 75000 THEN '50-75k' 
+    WHEN [YearlyIncome] >= 75001 AND [YearlyIncome] <= 100000 THEN '75k-100k' 
+    ELSE 'Above 100k' 
+  END
+ORDER BY No_of_transactions DESC;
+```
+
+**The Output:**
+| IncomeCategory  | No_of_transactions |
+|-------------|------------|
+| 25k-50k       | 18152  |
+| 50-75k     | 17737  |
+| 75k-100k     | 9946  |
+| 0-25K    | 8480   |
+| Above 100k  | 6083  |
