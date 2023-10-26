@@ -1,6 +1,6 @@
 # **Data Exploration**
 
-## To answer more questions for better analysis
+## To answer more questions for better understanding of customer purchases
 
 ### 1. What is the number of transations since 2018?
 
@@ -186,3 +186,8 @@ ORDER BY No_of_transactions DESC;
 | 75k-100k     | 9946  |
 | 0-25K    | 8480   |
 | Above 100k  | 6083  |
+
+### 7. What income category spend the most per transactions?
+```sql
+
+```
