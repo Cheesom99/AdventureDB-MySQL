@@ -1,6 +1,4 @@
-<p align="center">
-  <b><span style="font-size: 144px;">**Data Cleaning AND Transformation**</span></b>
-</p>
+#**Data Cleaning & Transformation**
 
 
 ## Getting the tables ready for analysis and the dashboard
