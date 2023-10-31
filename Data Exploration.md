@@ -109,13 +109,13 @@ ORDER BY No_of_customers DESC;
 **Steps Taken:**
 
 - In the subquery, the total sales amount for each customer key was calculated (added).
-- In the outerquery, I selected the Income Category and added the total sales amount for each, casted it to 2 dp also.
+- In the outerquery, I selected the Income Category and added the total sales amount for each, rounded it to 2 dp also.
 - Ordered by Highest Sales Category
 
 ```sql
 SELECT 
   IncomeCategory,
-  CAST(SUM(TotalSalesAmount) AS DECIMAL(18, 2)) AS Sales
+  ROUND(SUM(TotalSalesAmount,2)) AS Sales
 FROM (
   SELECT 
     CASE 
@@ -187,7 +187,53 @@ ORDER BY No_of_transactions DESC;
 | 0-25K    | 8480   |
 | Above 100k  | 6083  |
 
-### 7. What income category spend the most per transactions?
-```sql
+**NOTE**
+- This can be solved using subqueries just like the previous ones.
 
+
+### 7. What income category spend the most per transactions?
+
+**Steps Taken:**
+
+- In the subquery, the total sales amount for each customer key was calculated (added).
+- Also, the number of transactions were also counted
+- In the outerquery, I selected the Income Category and added the total sales amount for each and number of transactions, rounded it to 2 dp also.
+- Ordered by Average Order Value
+
+```sql
+SELECT 
+  IncomeCategory, 
+  ROUND(
+    SUM(TotalSalesAmount) / SUM(No_of_transactions), 
+    2
+  ) AS AOV 
+FROM 
+  (
+    SELECT 
+      CASE WHEN [YearlyIncome] >= 0 
+      AND [YearlyIncome] <= 25000 THEN '0-25k' WHEN [YearlyIncome] >= 25001 
+      AND [YearlyIncome] <= 50000 THEN '25k-50k' WHEN [YearlyIncome] >= 50001 
+      AND [YearlyIncome] <= 75000 THEN '50-75k' WHEN [YearlyIncome] >= 75001 
+      AND [YearlyIncome] <= 100000 THEN '75k-100k' ELSE 'Above 100k' END AS IncomeCategory, 
+      COUNT(s.ProductKey) AS No_of_transactions, 
+      SUM(s.SalesAmount) AS TotalSalesAmount 
+    FROM 
+      [AdventureWorksDW2019].[dbo].[DimCustomer] AS c 
+      JOIN [dbo].[FactInternetSales] AS s ON s.CustomerKey = c.CustomerKey 
+    GROUP BY 
+      [YearlyIncome]
+  ) AS Subquery 
+GROUP BY 
+  IncomeCategory
+ORDER BY 
+  AOV DESC;
 ```
+
+**The Output:**
+| Income Category | AOV    |
+|-----------------|--------|
+| Above 100k      | 616.63 |
+| 75k-100k        | 556.16 |
+| 50-75k          | 491.33 |
+| 25k-50k         | 438.21 |
+| 0-25k           | 401.77 |
