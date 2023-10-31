@@ -67,7 +67,31 @@ ORDER BY LEFT (OrderDateKey, 4)
 - 2021 has a low value because the data stopped at January
 
 
-### 4. Categorize the customers according to their earnings and the number of customers in each category?
+### 4. List the countries with stores?
+**Steps Taken:**
+
+- Used DISTINCT function to get the countries
+- Renamed the column
+
+```sql
+SELECT 
+  DISTINCT [EnglishCountryRegionName] AS Country
+FROM 
+  [AdventureWorksDW2019].[dbo].[DimGeography]
+```
+
+**The Output:**
+| Countries |
+|-----------|
+| Australia |
+| Canada    |
+| France    |
+| Germany   |
+| United Kingdom|
+| United States|
+
+
+### 5. Categorize the customers according to their earnings and the number of customers in each category?
 **Steps Taken:**
 
 - Used CASE statements to categorize the annual incomes
@@ -105,7 +129,7 @@ ORDER BY No_of_customers DESC;
 | 75k-100k    | 2755       |
 | Above 100k  | 1627       |
 
-### 5. What income category spends the most?
+### 6. What income category spends the most?
 **Steps Taken:**
 
 - In the subquery, the total sales amount for each customer key was calculated (added).
@@ -146,7 +170,7 @@ ORDER BY Sales DESC;
 | 0-25K  | 3407009.58   |
 
 
-### 6. What income category does the most transactions?
+### 7. What income category does the most transactions?
 **Steps Taken:**
 
 - Join Customer and Internet Sales Table on Customer key
@@ -191,7 +215,7 @@ ORDER BY No_of_transactions DESC;
 - This can be solved using subqueries just like the previous ones.
 
 
-### 7. What income category spend the most per transactions?
+### 8. What income category spend the most per transactions?
 
 **Steps Taken:**
 
