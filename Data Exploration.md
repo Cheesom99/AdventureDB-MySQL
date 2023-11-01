@@ -63,7 +63,7 @@ ORDER BY LEFT (OrderDateKey, 4)
 | 2020 | 17429 |  
 | 2021 | 834 | 
 
-- 2020 has a high number of internet sales because it was the COVID year and isolation
+- Number of customers were increasing year-on-year
 - 2021 has a low value because the data stopped at January
 
 
@@ -90,6 +90,8 @@ FROM
 | United Kingdom|
 | United States|
 
+- There are stores in 6 countries of the world
+
 
 ### 5. List the countries with the most number of customers since 2018?
 **Steps Taken:**
@@ -111,7 +113,6 @@ GROUP BY
   [SalesTerritoryCountry] 
 ORDER BY 
   No_of_customers DESC;
-
 ```
 
 **The Output:**
@@ -124,7 +125,7 @@ ORDER BY
 | Germany         | 1,780            |
 | Canada          | 1,571            |
 
-
+- USA had the most customers from 2018 till January 2021
 
 ### 6. Categorize the customers according to their earnings and the number of customers in each category?
 **Steps Taken:**
@@ -163,6 +164,8 @@ ORDER BY No_of_customers DESC;
 | 0-25K     | 2922       |
 | 75k-100k    | 2755       |
 | Above 100k  | 1627       |
+
+- Most of the customers earn between 25k to 75k annually.
 
 ### 7. What income category spends the most?
 **Steps Taken:**
@@ -204,6 +207,7 @@ ORDER BY Sales DESC;
 | Above 100k    | $3,750,950.96   |
 | 0-25K  | $3,407,009.58   |
 
+- In cummulative purchases, the income category 50k - 75k spent the most
 
 ### 8. What income category does the most transactions?
 **Steps Taken:**
@@ -245,6 +249,8 @@ ORDER BY No_of_transactions DESC;
 | 75k-100k     | 9946  |
 | 0-25K    | 8480   |
 | Above 100k  | 6083  |
+
+- In cummulative number of transactions, the income category 25k - 50k does most transactions
 
 **NOTE**
 - This can be solved using subqueries just like the previous ones.
@@ -297,7 +303,7 @@ ORDER BY
 | 25k-50k         | $438.21 |
 | 0-25k           | $401.77 |
 
-
+- People that earn above 100k do not make as much purchases as others but when they do, it tends to be on pricey items
 
 ### 10. What country spend the most per transactions?
 
@@ -332,3 +338,5 @@ ORDER BY
 | France          | $2,644,017.71 | 5,558               | $475.71             |
 | United States   | $9,389,789.51 | 21,344              | $439.93             |
 | Canada          | $1,977,844.86 | 7,620               | $259.56             |
+
+- USA has the most cummulative sales and transactions but do not spend as much as Australia per order.
