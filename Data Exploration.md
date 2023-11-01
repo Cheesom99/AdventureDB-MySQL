@@ -91,7 +91,42 @@ FROM
 | United States|
 
 
-### 5. Categorize the customers according to their earnings and the number of customers in each category?
+### 5. List the countries with the most number of customers since 2018?
+**Steps Taken:**
+
+- Used DISTINCT function to get the countries
+- Used COUNT and DISTINCT function to get the number of unique customers
+- Grouped by the Country and Ordered by Number of customers
+
+```sql
+SELECT 
+  DISTINCT [SalesTerritoryCountry] AS Country, 
+  COUNT(DISTINCT(s.[CustomerKey])) AS No_of_customers 
+FROM 
+  [AdventureWorksDW2019].[dbo].[DimSalesTerritory] AS st 
+  JOIN [dbo].[FactInternetSales] AS s ON st.SalesTerritoryKey = s.SalesTerritoryKey 
+WHERE 
+  LEFT (s.[OrderDateKey], 4) >= 2018 
+GROUP BY 
+  [SalesTerritoryCountry] 
+ORDER BY 
+  No_of_customers DESC;
+
+```
+
+**The Output:**
+| Country         | No. of Customers |
+| --------------- | ---------------- |
+| United States   | 7,819            |
+| Australia       | 3,591            |
+| United Kingdom  | 1,913            |
+| France          | 1,809            |
+| Germany         | 1,780            |
+| Canada          | 1,571            |
+
+
+
+### 6. Categorize the customers according to their earnings and the number of customers in each category?
 **Steps Taken:**
 
 - Used CASE statements to categorize the annual incomes
@@ -129,7 +164,7 @@ ORDER BY No_of_customers DESC;
 | 75k-100k    | 2755       |
 | Above 100k  | 1627       |
 
-### 6. What income category spends the most?
+### 7. What income category spends the most?
 **Steps Taken:**
 
 - In the subquery, the total sales amount for each customer key was calculated (added).
@@ -163,14 +198,14 @@ ORDER BY Sales DESC;
 **The Output:**
 | IncomeCategory  | Sales |
 |-------------|------------|
-| 50-75k       | 8714787.44   |
-| 25k-50k     | 7954391.47   |
-| 75k-100k     | 5531537.77   |
-| Above 100k    | 3750950.96   |
-| 0-25K  | 3407009.58   |
+| 50-75k       | $8,714,787.44   |
+| 25k-50k     | $7,954,391.47   |
+| 75k-100k     | $5,531,537.77   |
+| Above 100k    | $3,750,950.96   |
+| 0-25K  | $3,407,009.58   |
 
 
-### 7. What income category does the most transactions?
+### 8. What income category does the most transactions?
 **Steps Taken:**
 
 - Join Customer and Internet Sales Table on Customer key
@@ -215,7 +250,7 @@ ORDER BY No_of_transactions DESC;
 - This can be solved using subqueries just like the previous ones.
 
 
-### 8. What income category spend the most per transactions?
+### 9. What income category spend the most per transactions?
 
 **Steps Taken:**
 
@@ -230,7 +265,7 @@ SELECT
   ROUND(
     SUM(TotalSalesAmount) / SUM(No_of_transactions), 
     2
-  ) AS AOV 
+  ) AS Average_Order_Value 
 FROM 
   (
     SELECT 
@@ -250,14 +285,50 @@ FROM
 GROUP BY 
   IncomeCategory
 ORDER BY 
-  AOV DESC;
+  Average_Order_Value DESC;
 ```
 
 **The Output:**
 | Income Category | AOV    |
 |-----------------|--------|
-| Above 100k      | 616.63 |
-| 75k-100k        | 556.16 |
-| 50-75k          | 491.33 |
-| 25k-50k         | 438.21 |
-| 0-25k           | 401.77 |
+| Above 100k      | $616.63 |
+| 75k-100k        | $556.16 |
+| 50-75k          | $491.33 |
+| 25k-50k         | $438.21 |
+| 0-25k           | $401.77 |
+
+
+
+### 10. What country spend the most per transactions?
+
+**Steps Taken:**
+
+- Joined the Internet Sales tbale with the Sales territory table.
+- Selected important columns 
+- Calculated the AOV in the last column
+- Ordered by the AOV
+
+```sql
+SELECT 
+  st.SalesTerritoryCountry AS Country, 
+  ROUND(SUM([SalesAmount]), 2) AS Total_Sales, 
+  COUNT(s.ProductKey) AS No_of_transactions, 
+  ROUND(SUM([SalesAmount])/ COUNT(s.ProductKey), 2) AS Average_Order_Value  
+FROM 
+  [AdventureWorksDW2019].[dbo].[FactInternetSales] AS s
+JOIN [dbo].[DimSalesTerritory] AS st ON st.SalesTerritoryKey = s.SalesTerritoryKey
+GROUP BY 
+  st.SalesTerritoryCountry
+ORDER BY 
+  Average_Order_Value DESC;
+```
+
+**The Output:**
+| Country         | Total Sales   | No. of Transactions | Average Order Value |
+| --------------- | ------------- | ------------------- | ------------------- |
+| Australia       | $9,061,000.58 | 13,345              | $678.98             |
+| Germany         | $2,894,312.34 | 5,625               | $514.54             |
+| United Kingdom  | $3,391,712.21 | 6,906               | $491.13             |
+| France          | $2,644,017.71 | 5,558               | $475.71             |
+| United States   | $9,389,789.51 | 21,344              | $439.93             |
+| Canada          | $1,977,844.86 | 7,620               | $259.56             |
