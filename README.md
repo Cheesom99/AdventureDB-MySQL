@@ -44,9 +44,9 @@ All these questions are for the years 2018 - 2021 <br>
 - Are there trends in the sales overtime?
 
 ## Data Analysis
-- [Data Cleaning & Transformation]([#data-wrangling](https://github.com/Cheesom99/AdventureDB-MySQL/blob/main/Data%20Cleaning%20%26%20Transformation.md))
-- [Key Insights](#key-insights)
-- [Recommendations](#recommendations)
+- [Data Cleaning & Transformation](https://github.com/Cheesom99/AdventureDB-MySQL/blob/main/Data%20Cleaning%20%26%20Transformation.md)
+- [Data Exploration](https://github.com/Cheesom99/AdventureDB-MySQL/blob/main/Data%20Exploration.md)
+- [Recommendation](https://github.com/Cheesom99/AdventureDB-MySQL/blob/main/Recommendtion.md)
 
 
 ## The Dashboard
